@@ -5,8 +5,6 @@ from sklearn.neighbors import NearestNeighbors
 class Thesaurus(object):
 
     def __init__(self, embedding, embedding_index_lookup, n_neighbors=25):
-        # TODO Remove limited vocab
-        embedding = embedding[:100000, :]
         self.n_neighbors = n_neighbors
         self.embedding = embedding
         self.embedding_index_lookup = embedding_index_lookup
@@ -25,7 +23,7 @@ class Thesaurus(object):
         distances = distances.flatten()
         indices = indices.flatten()
         words = map(lambda x: self.embedding_word_lookup[x], indices)
-        return zip(words, distances)
+        return list(zip(words, distances))
 
 
 
